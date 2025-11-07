@@ -1,0 +1,1596 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+]>
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<rfc category="info" docName="draft-slevinski-formal-signwriting-06" ipr="trust200902">
+  <?rfc strict="yes" ?>
+  <?rfc toc="yes"?>
+  <?rfc tocdepth="3"?>
+  <?rfc symrefs="yes"?>
+  <?rfc sortrefs="yes" ?>
+  <?rfc compact="no" ?>
+  <?rfc subcompact="no" ?>
+
+  <front>
+    <title abbrev="FSW">Formal SignWriting</title>
+
+    <author fullname="Stephen E Slevinski Jr" initials="S."
+            surname="Slevinski">
+      <organization>Center for Sutton Movement Writing</organization>
+      <address>
+        <email>slevinski@signwriting.org</email>
+      </address>
+    </author>
+
+    <date month="January" year="2019" />
+
+    <area>General</area>
+
+    <workgroup>Sutton-Slevinski Collaboration</workgroup>
+
+    <keyword>script</keyword>
+    <keyword>encoding</keyword>
+    <keyword>model</keyword>
+    <keyword>Cartesian</keyword>
+    <keyword>SignWriting</keyword>
+    <keyword>plain text</keyword>
+    <keyword>rich text</keyword>
+    <keyword>sign language</keyword>
+    <keyword>grammar</keyword>
+
+    <abstract>
+      <t>Sutton SignWriting is the universal and complete solution for written sign language, ISO 15924 script code "Sgnw".
+      It has been applied by a wide and deep international community of sign language users.
+      Sutton SignWriting is an international standard for writing sign languages by hand or with computers. 
+      From education to research, from entertainment to religion, SignWriting has proven useful because people are using it to write signed languages.
+      </t>
+      <t>Formal SignWriting is one particular computerized design for Sutton SignWriting that envisions a sign as a two part word.
+      Each word is written as a string of characters that can be recognized and processed by regular expressions.
+      The design has been optimized for display, searching, sorting, text flow, and other character processing.
+      </t>
+      <t>Where as American Sign Language is a natural language, Formal SignWriting is a formal language.
+      A formal language is useful in mathematics, computer science, and linguistics.
+      </t>
+      <t>This memo defines a conceptual character encoding map for the Internet community.  It is published for reference, examination, implementation, and evaluation.  Distribution of this memo is unlimited.</t>
+    </abstract>
+  </front>
+
+  <middle>
+
+
+    <section title="Sutton SignWriting" anchor="sutton_signwriting">
+      <t>Sutton SignWriting is the universal and complete solution for written sign language.  It has been applied by a wide and deep international community of sign languages including: 
+American Sign Language, Arabian Sign Languages, Australian Sign Language, Bolivian Sign Language, Brazilian Sign Language, British Sign Language, Catalan Sign Language, Colombian Sign Language, 
+Czech Sign Language, Danish Sign Language, Dutch Sign Language, Ethiopian Sign Language, Finnish Sign Language, Flemish Sign Language, French-Belgian Sign Language, French Sign Language, German Sign Language,
+Greek Sign Language, Irish Sign Language, Italian Sign Language, Japanese Sign Language, Malawi Sign Language, Malaysian Sign Language, Maltese Sign Language, Mexican Sign Language, Nepalese Sign Language, 
+New Zealand Sign Language, Nicaraguan Sign Language, Norwegian Sign Language, Peruvian Sign Language, Philippines Sign Language, Polish Sign Language, Portugese Sign Language, Quebec Sign Language, 
+South African Sign Language, Spanish Sign Language, Swedish Sign Language, Swiss Sign Language, Taiwanese Sign Language, and Tunisian Sign Language.
+      </t>
+      <t>Sutton SignWriting is an international standard for writing sign languages by hand or with computers. 
+      From education to research, from entertainment to religion, SignWriting has proven useful because people are using it to write signed languages.
+      </t>
+      
+      <section title="Script" anchor="script">
+        <t>Sign language is vastly different than spoken language. Instead of the sequential sounds of the voice, there is a 3 dimensional space with simultaneous action. 
+        Sutton SignWriting creates 2-dimensional writing that is visually icon and full of featural information. 
+        This is true on the symbol level and on the sign level. 
+        A symbol represents phonemic information and is full of featural information to better understand the phonemes of the symbols. 
+        A sign is a 2-dimensional arrangement of symbols and is full of featural information to better understand the morphemes of the signs. 
+        </t>
+        <t>Punctuation is represented by a single symbol and separates a series of signs into structured sentences.  
+        Line breaks should not occur before punctuation.
+        </t>
+        <t>When written vertically, SignWriting can use 3 different lanes: left, middle, and right. 
+        The middle lane is the default lane and punctuation is always used in the middle lane. 
+        No matter the lane, the center of a sign is aligned with the center of the lane.
+        The left and right lanes are used to represent body weight shifts and are represented by a horizontal offset from the middle lane. 
+        Body weight shifts are important to the grammar of sign languages, used for two different grammatical aspects: 
+        1) role shifting during sign language storytelling, and 2) spatial comparisons of two items under discussion. 
+        One "role" or "item" is placed on the right side of the body (right lane), and the other on the left side of the body (left lane), and the weight shifts back and forth between the two, with the narrator in the middle (middle lane). 
+        </t>
+      </section>
+      <section title="Symbols" anchor="sutton_symbols">
+        <t>The Sutton SignWriting Symbols are the building blocks of Sutton SignWriting.
+        The symbols are arranged in 2 dimensions to create the sign images.
+        The symbols are organized with a 16-bit coded character set and a layered hierarchy.
+        The symbols are defined in the International SignWriting Alphabet 2010 (ISWA 2010).
+        The ISWA 2010 is a product of the Sutton-Slevinski collaboration.
+        </t>
+      </section>
+
+    </section>
+
+    <section title="Formal SignWriting" anchor="formal_signwriting">
+      <t>Formal SignWriting is one particular computerized encoding for Sutton SignWriting.
+      The design is based on character processing with regular expressions.
+      With Formal SignWriting, each sign is written as a two-part word of time and space.
+      </t>
+      <t>Where as American Sign Language is a natural language, Formal SignWriting is a formal language.
+      A formal language is useful in mathematics, computer science, and linguistics.
+      </t>
+      <section title="Design Principles" anchor="design_principles">
+        <t>Formal SignWriting was created using four design principles: completeness, universality, empowerment, and possiblity.
+        </t>
+        <section title="Complete" anchor="complete">
+          <t>Sutton SignWriting is a complex script with unique requirements and processing.
+          Formal SignWriting supports all of the structures inherent to the script.
+          </t>
+        </section>
+        <section title="Universal" anchor="universal">
+          <t>Sutton SignWriting can be used to write any sign language, natural or constructed.
+          Formal SignWriting supports all sign languages without requiring the addition of new characters or updated fonts.
+          </t>
+        </section>
+        <section title="Empowering" anchor="empowering">
+          <t>Sutton SignWriting is flexible enough to let each writer decide how they want to write their signs.
+          Formal SignWriting enable the writers to decide for themselves the spelling of their respective signs.
+          </t>
+        </section>
+        <section title="Possible" anchor="possible">
+          <t>Sutton SignWriting is a practical script that makes it possible to write sign language.
+          Formal SignWriting is a practical encoding because it works with existing font technologies across operating systems.
+          </t>
+        </section>
+      </section>
+
+      <section title="Characters" anchor="characters">
+        <t>Any sign can be written as a string of characters.
+        Formal SignWriting has two sets of characters that can be used: Formal SignWriting in ASCII (FSW) and SignWriting in Unicode (SWU).
+        These sets are isomorphic with an easy bi-directional conversion between the two sets.
+        </t>
+          <texttable align='left' style='all' anchor='table_other_codes'>
+            <ttcol>Description</ttcol>
+            <ttcol>FSW Characters</ttcol>
+            <ttcol>SWU Characters</ttcol>
+
+            <c>Sequence Marker</c>
+            <c>A</c>
+            <c>U+1D800</c>
+
+            <c>Signbox Markers</c>
+            <c>B, L, M, R</c>
+            <c>U+1D801 to U+1D804</c>
+
+            <c>Numbers</c>
+            <c>250 to 749</c>
+            <c>U+1D80C to U+1D9FF</c>
+            
+            <c>Symbols</c>
+            <c>S10000 to S38b07</c>
+            <c>U+40001 to U+4F428</c>
+            
+          </texttable>
+        
+        <section title="Formal SignWriting in ASCII (FSW)" anchor="fsw">
+          <t>Formal SignWriting in ASCII (FSW) was released in January 2012 and has been stable since.
+          FSW only uses characters from the ASCII subset of "ABLMRS0123456789xabcdef".
+          </t>
+        </section>
+        <section title="SignWriting in Unicode (SWU)" anchor="swu">
+          <t>SignWriting in Unicode (SWU) was first published in October 2016 and officially submitted to the Unicode Technical Committee in July 2017.
+          SWU is not part of the Unicode standard.
+          </t>
+          <t>SignWriting in Unicode is an experimental Unicode design that is promoted by the Center for Sutton Movement Writing.
+           This alternate encoding overwrites the Sutton SignWriting block in Unicode and uses plane 4 for the SignWriting symbols.
+          </t>
+        </section>
+
+      </section>
+
+      <section title="Building Blocks" anchor="building">
+        <t>The mathematical words of Formal SignWriting are plain text strings of characters. 
+        </t>
+        <section title="Regular Expressions" anchor="regex">
+          <t>Regular Expressions define string matching criteria.
+          Regular Expressions offer fast processing and wide support on the various platforms.
+          </t>
+          <t>Formal SignWriting is defined with regular expressions.
+          Formal languages and regular expressions are used to solve fundamental problems.
+          </t>
+          <texttable align='left' style='all' anchor='table_regex'>
+            <preamble>Regular Expression Basics</preamble>
+            <ttcol>Characters</ttcol>
+            <ttcol>Description</ttcol>
+            <ttcol>Example</ttcol>
+            <c>*</c><c>Match a literal 0 or more times </c><c>ABC* matches AB, ABC, ABCC, ...</c>
+            <c>+ </c><c>Match a literal 1 or more times </c><c>ABC+ matches ABC, ABCC, ABCCC, ...</c>
+            <c>? </c><c>Match a literal 0 or 1 times </c><c>ABC? matches AB or ABC</c>
+            <c>{#} </c><c>Match a literal "#" times </c><c>AB{2} matches ABB</c>
+            <c>[ ] </c><c>Match any single literal from a list </c><c>[ABC] matches A, B, or C</c>
+            <c>[ - ] </c><c>Match any single literal in a range </c><c>[A-C] matches A, B, or C</c>
+            <c>( ) </c><c>Creates a group for matching </c><c>A(BC)+ matches ABC, ABCBC, ABCBCBC, ...</c>
+            <c>( | ) </c><c>Matches one of several alternatives </c><c>(AB|BC|CD) will match AB, BC, or CD</c>
+          </texttable>
+        </section>
+        <section title="Token Patterns" anchor="tokens">
+          <t>The Formal SignWriting encoding model makes explicit those features which can be effectively and efficiently processed. 
+          The mathematical names are structured with 11 different tokens.  
+          They can be grouped in 4 layers:  the 5 structural makers (A, B, L, M, R), 
+          the 3 base symbol ranges (w, s, P), 
+          the 2 modifier indexes (i, o), and the numbers (n).
+          </t>
+          <texttable align='left' style='all' anchor='table_tokens_structural'>
+            <preamble>The Tokens of Formal SignWriting</preamble>
+            <ttcol>Token</ttcol>
+            <ttcol>Description</ttcol>
+
+            <c>A</c>
+            <c>Sequence Marker</c>
+
+            <c>B</c>
+            <c>Signbox Marker</c>
+
+            <c>L</c>
+            <c>Left Lane Marker</c>
+
+            <c>M</c>
+            <c>Middle Lane Marker</c>
+
+            <c>R</c>
+            <c>Right Lane Marker</c>
+
+            <c>w</c>
+            <c>Writing BaseSymbols</c>
+
+            <c>s</c>
+            <c>Detailed Location BaseSymbols</c>
+
+            <c>P</c>
+            <c>Punctuation BaseSymbols</c>
+
+            <c>i</c>
+            <c>Fill Modifiers</c>
+
+            <c>o</c>
+            <c>Rotation Modifiers</c>
+
+            <c>n</c>
+            <c>Number from 250 to 749</c>
+        </texttable>
+        <t>These tokens are used in patterns to form written sign language.
+        </t>
+      </section>
+
+      <section title="Symbols" anchor="symbols">
+          <t>Symbols can be described with 3 tokens: base symbol, fill modifier, and rotation modifier.</t>
+          <texttable align='left' style='all' anchor='table_tokens_symbol'>
+            <preamble>Symbol Tokens</preamble>
+            <ttcol>Token Pattern</ttcol>
+            <ttcol>Description</ttcol>
+
+            <c>w</c>
+            <c>Writing BaseSymbols.</c>
+
+            <c>s</c>
+            <c>Detailed Location BaseSymbols.</c>
+
+            <c>P</c>
+            <c>Punctuation BaseSymbols.</c>
+
+            <c>i</c>
+            <c>Fill Modifiers.</c>
+
+            <c>o</c>
+            <c>Rotation Modifiers.</c>
+
+            <c>wio</c><c>A writing symbol as 3 tokens of writing base, fill modifier and rotation modifier.  Writing symbols can be used in the spatial signbox or the temporal prefix.</c>
+            <c>[ws]io</c><c>A writing symbol or a detailed location symbol as 3 tokens of base, fill modifier, and rotation modifier.  Writing symbols and detail location symbols can be used in the temporal prefix.</c>
+            <c>Pio</c><c>A punctuation symbol as 3 tokens of punctuation base, fill modifier, and rotation modifier.  Punctuation symbols divide signs into sentences.</c>
+
+        </texttable>
+        
+        <t>There are a variety of symbol types that are used for different purposes.
+        </t>
+
+          <texttable align='left' style='all' anchor='table_symbol_type_definition'>
+            <preamble>Symbol Types and Descriptions</preamble>
+            <ttcol>Type</ttcol>
+            <ttcol>Description</ttcol>
+
+            <c>all symbols</c>
+            <c>All symbols used in Formal SignWriting.</c>
+
+            <c>writing</c>
+            <c>Symbols that can be used in the spatial signbox or the temporal prefix.</c>
+
+            <c>hand</c>
+            <c>Various handshapes</c>
+            
+            <c>movement</c>
+            <c>Contact symbols, small finger movements, straight arrows, curved arrows and circles.</c>
+            
+            <c>dynamic</c>
+            <c>Dynamic symbols are used to give the "feeling" or "tempo" to movement.</c>
+            
+            <c>head</c>
+            <c>Symbols for the head and face.</c>
+            
+            <c>hcenter</c>
+            <c>Used to determine the horizontal center of a sign.  Same as the head type.</c>
+            
+            <c>vcenter</c>
+            <c>Use to determine the vertical center of a sign.  Includes the head and trunk types.</c>
+            
+            <c>trunk</c>
+            <c>Symbols for torso movement, shoulders, and hips.</c>
+            
+            <c>limb</c>
+            <c>Symbols for limbs and fingers.</c>
+            
+            <c>location</c>
+            <c>Detailed location symbols can only be used in the temporal prefix.</c>
+            
+            <c>punctuation</c>
+            <c>Punctual symbols are used to divide signs into sentences.</c>
+            
+          </texttable>
+
+          <t>Symbol types occur in specific ranges depending on the characters involved.  
+          </t>
+          <texttable align='left' style='all' anchor='table_ranges_symbol_type'>
+            <preamble>Symbol Types and Ranges</preamble>
+            <ttcol>Type</ttcol>
+            <ttcol>FSW</ttcol>
+            <ttcol>SWU</ttcol>
+
+            <c>all symbols</c>
+            <c>S100 - S38b</c>
+            <c>U+40001 -U+4F480</c>
+
+            <c>writing</c>
+            <c>S100 - S37e</c>
+            <c>U+40001 -U+4EFA0</c>
+
+            <c>hand</c>
+            <c>S100 - 204</c>
+            <c>U+40001 -U+461E0</c>
+            
+            <c>movement</c>
+            <c>S205 - S2f6</c>
+            <c>U+461E1 -U+4BCA0</c>
+            
+            <c>dynamic</c>
+            <c>S2f7 - S2fe</c>
+            <c>U+4BCA1 -U+4BFA0</c>
+            
+            <c>head</c>
+            <c>S2ff - S36c</c>
+            <c>U+4BFA1 -U+4E8E0</c>
+            
+            <c>hcenter</c>
+            <c>S2ff - S36c</c>
+            <c>U+4BFA1 -U+4E8E0</c>
+            
+            <c>vcenter</c>
+            <c>S2ff - S375</c>
+            <c>U+4BFA1 -U+4EC40</c>
+            
+            <c>trunk</c>
+            <c>S36d - S375</c>
+            <c>U+4E8E1 -U+4EC40</c>
+            
+            <c>limb</c>
+            <c>S376 - S37e</c>
+            <c>U+4EC41 -U+4EFA0</c>
+            
+            <c>location</c>
+            <c>S37f - S386</c>
+            <c>U+4EFA1 -U+4F2A0</c>
+            
+            <c>punctuation</c>
+            <c>S387 - S38b</c>
+            <c>U+4F2A1 -U+4F480</c>
+            
+          </texttable>
+
+          <section title="FSW Symbols"  anchor="sym_fsw">
+          <t>Symbol keys are 6 characters long.  The first character of a symbol key is always "S".
+          The next 3 characters identify the symbol base.  
+          The last two characters identify the fill and rotation modifiers respectively.
+          </t>
+          <texttable align='left' style='all' anchor='table_definition_symbol_key'>
+            <preamble>Symbol Key Definition</preamble>
+            <ttcol>Regular Expression</ttcol>
+            <ttcol>Description</ttcol>
+            <c>S</c><c>Start of symbol key</c>
+            <c>[123][0-9a-f]{2}</c><c>Symbol key base</c>
+            <c>[0-5]</c><c>Fill modifier</c>
+            <c>[0-9a-f]</c><c>Rotation modifier</c>
+            <c>S[123][0-9a-f]{2}[0-5][0-9a-f]</c><c>Symbol key definition</c>
+          </texttable>
+ 
+        </section>
+        <section title="SWU Symbols"  anchor="sym_swu">
+          <t>The 37,811 symbols of the International SignWriting Alphabet 2010 are uniquely idendified with Unicode characters in the range U+40001 to U+4F428.
+          </t>
+          <t>A simple formula transforms a symbol key into a codepoint.  Given a symbol key as variable "key", in JavaScript the function is defined as:
+            <list><t>var code = ((parseInt(key.slice(1,4),16) - 256) * 96) + ((parseInt(key.slice(4,5),16))*16) + parseInt(key.slice(5,6),16) + 1;
+            </t></list>
+          </t>
+        </section>
+
+      </section>
+      <section title="Numbers"  anchor="numbers">
+          <t> The numbers encode the ruler principle with characters.
+          The ruler principle is built in automatically for scripts written sequentially in one dimension.  
+          The number characters are needed to specify the spatial relationship between symbols.
+          </t>  
+          <t>
+          Both FSW and SWU use a restricted range of 500 numbers between 250 and 749.
+          </t>
+
+          <t>Cartesian Coordinates can be described with 2 tokens: number and number.
+          These numbers represent the X and Y coordinates respectively.
+          </t>
+          <texttable align='left' style='all' anchor='table_tokens_coordinates'>
+            <preamble>Coordinate Tokens</preamble>
+            <ttcol>Token Patterns</ttcol>
+            <ttcol>Description</ttcol>
+            <c>n</c>
+            <c>Number from 250 to 749</c>
+            <c>nn</c><c>Coordinate with X and Y values as 2 numbers</c>
+        </texttable>
+
+        <section title="FSW Numbers"  anchor="num_fsw">
+          <t>Formal SignWriting in ASCII has two definitions for a number.  
+          The more general definition simply defines 3 digits together with a potential range of 1000.
+          A more explicit definition correctly restricts the numbers to 500 possibilities in the 250 to 749 range.  The general coordinate definition is adequate for processing.
+          </t>
+          <t>An X,Y coordinate is created by using the letter "x" to join two FSW numbers.
+          </t>
+          <t><list style='hanging'>
+            <t hangText="General 3 digit number definition:">[0-9]{3}</t>
+            <t hangText="General coordinate definition:">[0-9]{3}x[0-9]{3}</t>
+            <t hangText="Explicit number definition from 250 to 749:">(2[5-9][0-9]|[3-6][0-9]{2}|7[0-4][0-9])</t>
+            <t hangText="Explicit coordinate definition:">(2[5-9][0-9]|[3-6][0-9]{2}|7[0-4][0-9])x(2[5-9][0-9]|[3-6][0-9]{2}|7[0-4][0-9])</t>
+          </list></t>
+        </section>
+        <section title="SWU Numbers"  anchor="num_swu">
+          <t>SignWriting in Unicode has a single definition for a number.
+          Each number is uniquely idendified with Unicode characters in the range U+1D80C to U+1D9FF.
+          A coordinate is defined as 2 numbers together.
+          </t>
+        </section>
+      </section>
+
+      </section>
+
+      <section title="Two-Part Word" anchor="two_part_word">
+        <t>Formal SignWriting envisions a sign as a two-part word of time and space.
+        The two-dimensional appearance of a sign is written in the spatial signbox as an objective arrangement.
+        The one-dimensional order of a sign is written in the temporal prefix as a subjective analysis.
+        </t>
+        <section title="Spatial Signbox" anchor="spatial_signbox">
+          <t>The spatial signbox is a two-dimensional cluster of symbols.
+          The position of each symbol is determined by the writer and defined using Cartesian Coordinates that represent the top-left of the symbol image.
+          Formal numbers range from 250 to 749.
+          </t>
+          <t>2-dimensional space does not have a normative 1-dimensional order.  
+          When symbols overlap, the relative order of the overlapping symbols is important.
+          Symbols written first appear underneath symbols that are written later.
+          Otherwise, the exact string order of the spatial symbols is unpredictable.
+          The spatial signbox is neither formatting nor style and represents meaning that is beyond the temporal prefix.
+          </t>
+          <figure>
+            <artwork>
+           Y Axis
+             | 250
+             | 
+             |
+             |
+             |
+             |
+X Axis       |
+  -----------+------------
+  250        |         749
+             |
+             |
+             |
+             |
+             |
+             | 749
+            </artwork>
+          </figure>
+
+          <t>
+          </t>
+          <t>The Spatial Signbox can be described with 8 tokens.
+          </t>
+          <texttable align='left' style='all' anchor='table_tokens_signbox'>
+            <preamble>Spatial Signbox Tokens</preamble>
+            <ttcol>Token Pattern</ttcol>
+            <ttcol>Description</ttcol>
+
+            <c>B</c>
+            <c>Signbox Marker</c>
+
+            <c>L</c>
+            <c>Left Lane Marker</c>
+
+            <c>M</c>
+            <c>Middle Lane Marker</c>
+
+            <c>R</c>
+            <c>Right Lane Marker</c>
+
+            <c>w</c>
+            <c>Writing BaseSymbols</c>
+
+            <c>i</c>
+            <c>Fill Modifiers</c>
+
+            <c>o</c>
+            <c>Rotation Modifiers</c>
+
+            <c>n</c>
+            <c>Number from 250 to 749</c>
+
+            <c>wio</c><c>A writing symbol as 3 tokens of writing base, fill modifier and rotation modifier</c>
+            <c>nn</c><c>Coordinate with X and Y values as 2 numbers</c>
+            <c>wionn</c><c>A spatial symbol as 5 tokens, with 3 tokens for a writing symbol and 2 tokens for coordinates of top left placement</c>
+            <c>(wionn)*</c><c>Zero or more spatial symbols</c>
+            <c>Bnn(wionn)*</c><c>A Signbox with a preprocessed maximum coordinate and a list of spatial symbols used for horizontal writing</c>
+            <c>[LMR]</c><c>A lane marker: either left, middle or right.</c>
+            <c>[LMR]nn(wionn)*</c><c>A Signbox in either the left, middle, or right lane with a preprocessed maximum coordinate and a list of spatial symbols used for vertical writing</c>
+
+          </texttable>
+
+          <t>The spatial signbox is assigned to a lane, has a preprocessed maximum coordinate and zero or more writing symbols with X and Y coordinates for each symbol.
+          </t>
+
+          <section title="Bounding Box"  anchor="bounding">
+            <t>The symbols do not have a consistent width or height.
+            The center of a symbol can be safely assumed to be at half-width and half-height.
+            A bounding box for a symbol is based on the symbol width and height.
+            Each symbol has a defined width and height in a text file with 37,811 lines.
+            Alternately, the symbol width and height can be calculated by analyzing the glyphs in a TTF font file, using JavaScript or other language.
+            </t>
+            <t>The bounding box of a sign is a tight box around the symbols.
+            The bounding box is used to determine the width and height of a sign.
+            </t>
+            <t>The bounding box of a sign consists of four values: Minimum X, Minimum Y, Maximum X and Maximum Y.
+            The values of the bounding box is taken straight from the coordinates in an Formal SignWriting word.
+            </t>
+            
+          </section>
+
+
+          <section title="Maximum Coordinate"  anchor="max_coord">
+            <t>The maximum coordinate for a Signbox is pre-calculated to simplify layout for width, height, and center.
+            For each symbol, the width of height of that symbol is added to the coordinate position of that symbol.
+            These new coordinate values represent the bottom-right coordinate of each symbol bounding box.
+            The maximum X value is joined with the maximum Y value to determine the maximum coordinate.
+            </t>
+          </section>
+          
+          <section title="Centering a Sign"  anchor="centering">
+            <t>To simplify layout and improve 2-dimensional searching, every sign has a normalized center based on symbol type, size, and mathematical formula.
+            The vertical center is based on the center of the bounding box around the head symbols.
+            The horizontal center is based on the center of the bounding box around the head and trunk symbols.
+            If a sign doesn't contain head or trunk symbols, then the bounding box of all symbols is used.
+            For the symbol ranges see <xref target="table_ranges_symbol_type" />
+            </t>
+            <t>Once the center of a sign has been determined, the symbols are moved so that the center is coordinate 500,500.
+            </t>
+          </section>
+          
+
+        </section>
+        <section title="Temporal Prefix" anchor="temporal_prefix">
+          <t>The temporal prefix is a one-dimensional list of symbols that is written by an author.
+          The arrangement of the symbols is based on a particular theory of sorting.
+          The order of the symbols in the temporal prefix is significant because sorting is possible with a binary string comparison.
+          The temporal prefix is neither formatting nor style and represents meaning not found in the spatial signbox.
+          </t>
+
+        <t>Signs are written in 2-dimensional space which does not have a normative 1-dimensional order.
+        Any 1-dimensional order of 2-dimensional space is subjective.  
+        Some 1-dimensional orders may be canonical according to a particular theory, but there are a variety of theories on setting a 1-dimensional order.
+        </t>
+        <t>The temporal prefix will use the same symbols that are used in the spatial signbox, but it does not need to use all of them and it is not limited to only those symbols.
+        The temporal prefix is a list of writing symbols and/or detailed location symbols that identify temporal order and additional analysis.
+        A valid sequence must contain at least one symbol and can not contain punctuation.  
+        </t>
+        <t>The temporal prefix allows for sorting that is universally supported through binary string comparison.
+        </t>
+        <t>There are several theories on the best way to structure a temporal prefix.
+        The most productive is based on the SignSpelling Sequence theory of Valerie Sutton.  
+        A temporal prefix is structured as a series of beginning handshapes, followed by transitional movements and dynamics that lead to the next set of handshapes.
+        This pattern continues until the end of the sign.
+        The last section of the temporal prefix should contain symbols of of type "head", "trunk", and "limb".
+        </t>
+        <t>Detailed location symbols of type "location" can be used in a temporal prefix, but are rarely (if ever) needed for general writing.
+        </t>
+
+          <t>A temporal prefix can be described with 5 tokens.
+          </t>
+          <texttable align='left' style='all' anchor='table_tokens_sequence'>
+            <preamble>Temporal Prefix Tokens</preamble>
+            <ttcol>Token Patterns</ttcol>
+            <ttcol>Description</ttcol>
+            <c>A</c>
+            <c>Sequence Marker</c>
+
+            <c>w</c>
+            <c>Writing BaseSymbols</c>
+
+            <c>s</c>
+            <c>Detailed Location BaseSymbols</c>
+
+            <c>i</c>
+            <c>Fill Modifiers</c>
+
+            <c>o</c>
+            <c>Rotation Modifiers</c>
+
+            <c>(A([ws]io)+)?</c><c>An optional temporal prefix to be used as a prefix for a Signbox</c>
+
+          </texttable>
+
+          <t>The temporal prefix starts with a sequence marker and includes an ordered list of writing symbols and detailed locations.
+          </t>
+
+        </section>
+      </section>
+
+      <section title="Styling String" anchor="styling">
+          <t>The styling string of Formal SignWriting uses a lite markup to define a variety of styling options.
+          The styling string is the same for FSW and SWU.
+          The entire sign can be customized for padding, coloring, and size.
+          Individual symbols within a sign can be customized for coloring and size.
+          For SVG output, class names and IDs can be defined.
+          A styling string can be added to the end of any Formal SignWriting string to style a particular sign.
+          </t>
+          <t>Colors can be written as CSS color names or as color hex values. 
+          <list style='hanging'>
+            <t hangText="CSS Color Names:">[a-zA-Z]+</t>
+            <t hangText="Color Hex Values:">[0-9a-fA-F]{3}([0-9a-fA-F]{3})?</t>
+          </list>
+          </t>
+          <t>The styling string is divided into 3 sections: one for the entire sign, one for individual symbols, and one for SVG class names and ID.
+          The styling string starts with a single dash, after which is the section about the entire sign.
+          A second dash, if present, marks the start of the section about the individual symbols.
+          A third dash, if present, marks the start of the section about the SVG class names and ID.
+          The order of the styling options is important.
+          <list style='hanging'>
+            <t hangText="Styling String:">-C?(P[0-9]{2})?(G_([0-9a-fA-F]{3}([0-9a-fA-F]{3})?|[a-zA-Z]+)_)?(D_([0-9a-fA-F]{3}([0-9a-fA-F]{3})?|[a-zA-Z]+)(,([0-9a-fA-F]{3}([0-9a-fA-F]{3})?|[a-zA-Z]+))?_)?(Z([0-9]+(\.[0-9]+)?|x))?(-(D[0-9]{2}_([0-9a-fA-F]{3}([0-9a-fA-F]{3})?|[a-zA-Z]+)(,([0-9a-fA-F]{3}([0-9a-fA-F]{3})?|[a-zA-Z]+))?_)*(Z[0-9]{2},[0-9]+(\.[0-9]+)?(,[0-9]{3}x[0-9]{3})?)*)?(--?[_a-zA-Z][_a-zA-Z0-9-]{0,100}( -?[_a-zA-Z][_a-zA-Z0-9-]{0,100})*!([a-zA-Z][_a-zA-Z0-9-]{0,100}!)?)?</t>
+          </list>
+          </t>
+
+          <section title="Entire Sign"  anchor="style_sign">
+            <t>There are several options for styling an entire sign.
+            <list style='hanging'>
+              <t hangText="C">Colorize</t>
+              <t hangText="P">Padding</t>
+              <t hangText="G">Background</t>
+              <t hangText="D">Detail colors</t>
+              <t hangText="Z">Zoom level</t>
+            </list>
+            </t>
+            <section title="Colorize"  anchor="colorize">
+              <t>Colorizing a sign will set the color of each symbol based on its classification.
+              <list style='hanging'>
+                <t hangText="Hand">0000CC</t>
+                <t hangText="Movement">CC0000</t>
+                <t hangText="Dynamic">FF0099</t>
+                <t hangText="Head">006600</t>
+                <t hangText="Body">000000</t>
+                <t hangText="Detailed Location">884411</t>
+                <t hangText="Punctuation">FF9900</t>
+              </list>
+              </t>
+              <texttable align='left' style='all' anchor='table_style_colorize'>
+                <ttcol>Styling String</ttcol>
+                <ttcol>Description</ttcol>
+                <c>-C</c><c>Colorize the symbols of the sign</c>
+              </texttable>
+            </section>
+            <section title="Padding"  anchor="padding">
+              <t>Padding is applied around the entire sign.  A two-digit number is used to set the padding.
+              </t>
+              <texttable align='left' style='all' anchor='table_style_padding'>
+                <ttcol>Styling String</ttcol>
+                <ttcol>Description</ttcol>
+                <c>-P01</c><c>A padding of 1 around the sign</c>
+              </texttable>
+            </section>
+            <section title="Background"  anchor="background">
+              <t>By default, the background of a sign is transparent.  
+              The background color can be set with a CSS color name or with a color hex value.  
+              The color name or value must be surrounded by underscores.
+              </t>
+              <texttable align='left' style='all' anchor='table_style_background'>
+                <ttcol>Styling String</ttcol>
+                <ttcol>Description</ttcol>
+                <c>-G_lightblue_</c><c>Background color of light blue.</c>
+                <c>-G_f00_</c><c>Background color as 3 hex values.</c>
+                <c>-G_ff0000_</c><c>Background color as 6 hex values.</c>
+              </texttable>
+            </section>
+            <section title="Detail Colors"  anchor="detail_colors">
+              <t>By default, each symbol has a line color of black and a fill color of white.
+              The line color for all of the symbols can be set with a CSS color name or with a color hex value.  
+              The color name or value must be surrounded by underscores.
+              Setting the fill color is optional.  To set the fill color, put a comma and the fill color after the line color but before the closing underscore.
+              </t>
+              <texttable align='left' style='all' anchor='table_style_detail'>
+                <ttcol>Styling String</ttcol>
+                <ttcol>Description</ttcol>
+                <c>-D_red_</c><c>Line color of red.</c>
+                <c>-D_red,yellow_</c><c>Line color of red with a fill color of yellow.</c>
+              </texttable>
+            </section>
+            <section title="Zoom Level" anchor="zoom">
+              <t>By default, a sign is set to zoom level 1.  The zoom level can be set with an integer or a decimal number.
+              </t>
+              <t>Alternatively, the zoom level can be set to lower-case 'x', for extendable. 
+              The SVG created will not specify the width or height, so that the sign image will fill whatever container it is placed inside.
+              </t>
+              <texttable align='left' style='all' anchor='table_style_zoom'>
+                <ttcol>Styling String</ttcol>
+                <ttcol>Description</ttcol>
+                <c>-Z2</c><c>Zoom level of 2</c>
+                <c>-Z15.7</c><c>Zoom level of 15.7</c>
+                <c>-Zx</c><c>Zoom level of extendable</c>
+              </texttable>
+            </section>
+
+          </section>
+
+          <section title="Individual Symbols"  anchor="style_symbols">
+            <t>There are two options for styling individual symbols.  
+            Individual symbols are identified by a two-digit number, which identifies the order the symbol appears in the Signbox. 
+            <list style='hanging'>
+              <t hangText="D">Detail colors</t>
+              <t hangText="Z">Zoom level</t>
+            </list>
+            </t>
+            <section title="Detail Colors" anchor="detail_colors_symbols">
+              <t>By default, each symbol has a line color of black and a fill color of white.
+              The line color for an individual symbol can be set with a CSS color name or with a color hex value.  
+              The color name or value must be surrounded by underscores.
+              Setting the fill color is optional.  To set the fill color, put a comma and the fill color after the line color but before the closing underscore.
+              </t>
+              <texttable align='left' style='all' anchor='table_style_sym_detail'>
+                <ttcol>Styling String</ttcol>
+                <ttcol>Description</ttcol>
+                <c>--D01_red_</c><c>First symbol line color of red.</c>
+                <c>--D01_red,yellow_</c><c>First symbol line color of red with a fill color of yellow.</c>
+                <c>--D01_red_D02_green_</c><c>First symbol line color of red and second symbol line color of green.</c>
+              </texttable>
+            </section>
+            <section title="Zoom Level" anchor="zoom_symbols">
+              <t>By default, each symbol is set to zoom level 1.  The zoom level of individual symbols can be set with an integer or a decimal number.
+              </t>
+              <t>Additionally, an offset coordinate can be specified with an individual symbol's zoom level.  
+              The offset coordinate of 500x500 is considered no offset for either the x or y value.
+              </t>
+              <texttable align='left' style='all' anchor='table_style_sym_zoom'>
+                <ttcol>Styling String</ttcol>
+                <ttcol>Description</ttcol>
+                <c>--Z03,2</c><c>Third symbol zoom level of 2</c>
+                <c>--Z04,15.7</c><c>Fourth symbol zoom level of 15.7</c>
+                <c>--Z04,1.5,480x500</c><c>Fourth symbol zoom level of 1.5 with a -20 offset applied to the X value of the symbol's placement coordinate.</c>
+              </texttable>
+            </section>
+
+          </section>
+
+          <section title="SVG Class Names and ID"  anchor="classes_and_id">
+            <t>When using SVG, there are two additional styling options of class names and ID.
+            <list style='hanging'>
+              <t hangText="{class names}!">SVG Class Names</t>
+              <t hangText="{ID}!">SVG ID</t>
+            </list>
+            </t>
+            <t>Both class names and ID use a restricted ASCII subset.
+            <list style='hanging'>
+              <t hangText="class names">-?[_a-zA-Z][_a-zA-Z0-9-]{0,100}( -?[_a-zA-Z][_a-zA-Z0-9-]{0,100})*</t>
+              <t hangText="ID">[a-zA-Z][_a-zA-Z0-9-]{0,100}</t>
+            </list>
+            </t>
+              <t>Each SVG can be created with a list of class names separated by spaces, ending in an exclamation (!) mark.
+              After the class names exclamation mark, an ID can be written followed by another exclamation mark.
+              </t>
+              <texttable align='left' style='all' anchor='table_style_class_names'>
+                <ttcol>Styling String</ttcol>
+                <ttcol>Description</ttcol>
+                <c>---glowing!</c><c>A class name of "glowing"</c>
+                <c>---flashing primary!</c><c>Two class names of "flashing" and "primary".</c>
+                <c>---!cursor!</c><c>SVG created with an ID of "cursor"</c>
+                <c>---flashing!cursor!</c><c>SVG created with a class name of "flashing" and an ID of "cursor"</c>
+              </texttable>
+
+          </section>
+      </section>
+
+      <section title="Query Language"  anchor="query">
+          <t>The query language of Formal SignWriting allows for precise searching of signs written in either FSW or SWU.
+          A query string is a concise representation for a much larger and detailed set of regular expressions.
+          The regular expressions can be used to quickly and accurately search large files and databases containing Formal SignWriting.
+          </t>
+          <t>A filter and repeat pattern of searching is used as a series of match criteria. 
+          A file, database, or text input is searched using a sequence of steps.  
+          Each step applies a single match criteria.  Matching results are collated and the next search criteria is applied.  
+          The pattern of searching the previous results continues until all regular expressions have been used.
+          </t>
+          <t>The query language of Formal SignWriting is different for FSW and SWU, but allows for the same searching strategies.
+          Any FSW string and SWU string can easily be converted into several different query string, depending on the search parameters.
+          </t>
+          <t>There are two main sections of a query string.  The first searches the spatial signbox.  The second searches the temporal prefix.  
+          Both sections use the same definition for a symbol or a range. 
+          </t>
+          <t>
+          The symbol search can match an exact symbol, or a set of symbols with an unspecified fill or rotation.
+          </t>
+          <t>With FSW, the fill and rotation modifiers of a symbol key can be replaced with the "u" character as a wildcard.
+          The "u" stands for unknown and will match all values rather than a specific character.  
+          </t>
+          <t>With SWU, the letters "f' or "r" can be written after a symbol to indicate an unspecified fill or rotation respectively.
+          </t>
+          <t>
+          The range search can match a range of base symbols.
+          The base symbol range consists of 2 values: the starting base symbol and the ending base symbol.
+          Every symbol between these 2 base symbols will be matched.
+          </t>
+          <t>
+          <list style='hanging'>
+            <t hangText="Symbol Search in FSW:">S[123][0-9a-f]{2}[0-5u][0-9a-fu]</t>
+            <t hangText="Symbol Search in SWU (UTF-16):">((\uD8C0[\uDC01-\uDFFF])|([\uD8C1-\uD8FC][\uDC00-\uDFFF])|(\uD8FD[\uDC00-\uDC80]))f?r?</t>
+            <t hangText="Range Search in FSW:">R[123][0-9a-f]{2}t[123][0-9a-f]{2}</t>
+            <t hangText="Symbol Search in SWU (UTF-16):">R((\uD8C0[\uDC01-\uDFFF])|([\uD8C1-\uD8FC][\uDC00-\uDFFF])|(\uD8FD[\uDC00-\uDC80]))((\uD8C0[\uDC01-\uDFFF])|([\uD8C1-\uD8FC][\uDC00-\uDFFF])|(\uD8FD[\uDC00-\uDC80]))</t>
+          </list>
+          </t>
+          <t>At the end of the query string is an optional styling string flag represented by a dash (-).
+          If present, the Formal SignWriting strings will include any styling strings.
+          If the styling string flag isn't included, the query string will only find plain text Formal SignWriting strings without the styling string. 
+          </t>
+          <t>The full query string definition allows for the possibility of searching the temporal prefix and the spatial signbox at the same time.
+          <list style='hanging'>
+            <t hangText="Query String in FSW:">Q((A(S[123][0-9a-f]{2}[0-5u][0-9a-fu]|R[123][0-9a-f]{2}t[123][0-9a-f]{2})+)?T)?(S[123][0-9a-f]{2}[0-5u][0-9a-fu]([0-9]{3}x[0-9]{3})?|R[123][0-9a-f]{2}t[123][0-9a-f]{2}([0-9]{3}x[0-9]{3})?)*(V[0-9]+)?-?</t>
+            <t hangText="Query String in SWU (UTF-16):">Q((A(((\uD8C0[\uDC01-\uDFFF])|([\uD8C1-\uD8FC][\uDC00-\uDFFF])|(\uD8FD[\uDC00-\uDC80]))f?r?|R((\uD8C0[\uDC01-\uDFFF])|([\uD8C1-\uD8FC][\uDC00-\uDFFF])|(\uD8FD[\uDC00-\uDC80]))f?r?((\uD8C0[\uDC01-\uDFFF])|([\uD8C1-\uD8FC][\uDC00-\uDFFF])|(\uD8FD[\uDC00-\uDC80]))f?r?)+)?T)?((R((\uD8C0[\uDC01-\uDFFF])|([\uD8C1-\uD8FC][\uDC00-\uDFFF])|(\uD8FD[\uDC00-\uDC80]))f?r?((\uD8C0[\uDC01-\uDFFF])|([\uD8C1-\uD8FC][\uDC00-\uDFFF])|(\uD8FD[\uDC00-\uDC80]))f?r?(\uD836[\uDC0C-\uDDFF]\uD836[\uDC0C-\uDDFF])?)|(((\uD8C0[\uDC01-\uDFFF])|([\uD8C1-\uD8FC][\uDC00-\uDFFF])|(\uD8FD[\uDC00-\uDC80]))f?r?(\uD836[\uDC0C-\uDDFF]\uD836[\uDC0C-\uDDFF])?))*(V[0-9]+)?-?</t>
+          </list>
+          </t>
+
+          <section title="Searching the Spatial Signbox" anchor="search_signbox">
+            <t>The spatial signbox is a list of symbols with 2-dimensional placement.
+            The query "Q" will find all signs regardless of the symbols used or their placement.
+            </t>
+            <t>It is possible to specify one or more symbols (or ranges of symbols) that must be included in the Signbox to indicate a match.
+            The order of the symbols is not important.
+            Each symbol (or range) can include an optional coordinate.
+            The coordinate is a restriction on the match, such that a symbol must be used within a certain variance of the coordinate to qualify as a match. 
+            </t>
+            <t>The variance is a number value, 0 or greater with a default value of 20.
+            A variance of 0 will only find symbols used at an exact coordinate.
+            A variance of 5 will match the symbols used at a coordinate, plus or minus 5 for both X and Y numbers.
+            <list style='hanging'>
+              <t hangText="Symbol Search with Optional Coordinate:">S[123][0-9a-f]{2}[0-5u][0-9a-fu]([0-9]{3}x[0-9]{3})?</t>
+              <t hangText="Range Search with Optional Coordinate:">R[123][0-9a-f]{2}t[123][0-9a-f]{2}([0-9]{3}x[0-9]{3})?</t>
+              <t hangText="Variance:">(V[0-9]+)?</t>
+              <t hangText="Spatial Signbox Search Query:">Q(S[123][0-9a-f]{2}[0-5u][0-9a-fu]([0-9]{3}x[0-9]{3})?|R[123][0-9a-f]{2}t[123][0-9a-f]{2}([0-9]{3}x[0-9]{3})?)*(V[0-9]+)?</t>
+            </list>
+            </t>
+
+            <texttable align='left' style='all' anchor='table_signbox_query'>
+              <preamble>Spatial Signbox Query Examples</preamble>
+              <ttcol>Query</ttcol>
+              <ttcol>Description</ttcol>
+              <c>Q</c><c>All signs</c>
+              <c>QS100uu</c><c>Signs with the index handshape in the spatial signbox</c>
+              <c>QS100uu480x480</c><c>Signs with the index handshape in the spatial signbox used near coordinate (480,480)</c>
+              <c>QS100uu480x480V0</c><c>Signs with the index handshape in the spatial signbox used at the exact coordinate (480,480)</c>
+              <c>QS100uuR2fft36c</c><c>Signs with the index handshape and a symbol from the head &amp; face range</c>
+            </texttable>
+
+          </section>
+
+          <section title="Searching the Temporal Prefix" anchor="search_sequence">
+            <t>The temporal prefix is a list of symbol keys.  
+            The query "QT" will find all signs that include a temporal prefix.
+            </t>
+            <t>It is possible to specify the start of the temporal prefix by identifying a series of symbols and/or ranges.
+            The query will start with an "QA" and end with a "T", such as "QA...T".
+            Between the "QA" and "T", a series of symbol searches and/or range searches will specify the desired start of the temporal prefix.
+            The order of the symbols and ranges is important.
+            <list style='hanging'>
+              <t hangText="Temporal Prefix Search Query:">Q((A(S[123][0-9a-f]{2}[0-5u][0-9a-fu]|R[123][0-9a-f]{2}t[123][0-9a-f]{2})+)?T)?</t>
+            </list>
+            </t>
+            
+            <texttable align='left' style='all' anchor='table_prefix_query'>
+              <preamble>Temporal Prefix Query Examples</preamble>
+              <ttcol>Query</ttcol>
+              <ttcol>Description</ttcol>
+              <c>QT</c><c>All signs that include the temporal prefix</c>
+              <c>QAS100uuT</c><c>Signs with a temporal prefix that starts with the index handshape</c>
+              <c>QAS100uuR100t204S20500T</c><c>Signs with a temporal prefix that starts with the index handshape, followed by any handshape, followed by the single contact</c>
+            </texttable>
+            
+          </section>
+          
+          <section title="Including the Styling String"  anchor="include_style">
+            <t>At the end of the query string is an optional styling string flag represented by a dash (-).
+            If present, the Formal SignWriting strings will include any styling strings.
+            If the styling string flag isn't included, the query string will only find plain text Formal SignWriting strings without the styling string. 
+            <list style='hanging'>
+              <t hangText="Styling String Search Query:">Q-</t>
+              <t hangText="Styling String Search Only:">-</t>
+            </list>
+            </t>
+            
+            <texttable align='left' style='all' anchor='table_style_query'>
+              <preamble>Styling String Query Examples</preamble>
+              <ttcol>Query</ttcol>
+              <ttcol>Description</ttcol>
+              <c>Q-</c><c>All signs including the styling strings when present</c>
+              <c>-</c><c>Only find styling string without including the Formal SignWriting</c>
+            </texttable>
+          </section>
+      </section>
+
+    </section>
+
+    <section title="Technology Integration" anchor="technology_integration">
+      <t>Formal SignWriting has been specifically designed to integrate with standard technology on the phone, tablet, and desktop. 
+      </t>
+      
+      <section title="Fonts" anchor="fonts">
+        <t>The Sutton SignWriting Fonts are available as source SVG and as three TrueType Font files.
+        </t>
+        <figure>
+          <artwork>
+      Sutton SignWriting Fonts
+      Copyright (c) 1974-2017, Center for Sutton Movement Writing, inc
+      Licensed under the SIL Open Font License v1.1
+          </artwork>
+        </figure>
+        
+          <t>The Sutton SignWriting TrueType fonts are available for download and installation.
+          </t>
+          <t>Installing the fonts using the instructions below is not required, but it will improve the user experience. 
+          If the fonts are not installed on the system, CSS declarations will install the fonts in the browser cache.
+          </t>
+          <section title="Windows, Linux, and Mac"  anchor="font_desktop">
+            <t>Installation is straight forward for Windows, Linux and Mac. Simply download the TrueType fonts and install as usual.
+            <list style='hanging'>
+              <t><xref target="SuttonSignWritingFontLine">Sutton SignWriting Line TrueType Font</xref></t>
+              <t><xref target="SuttonSignWritingFontFill">Sutton SignWriting Fill TrueType Font</xref></t>
+              <t><xref target="SuttonSignWritingFontOneD">Sutton SignWriting One-D TrueType Font</xref></t>
+            </list>
+            </t>
+          </section>
+          <section title="Mac and iOS" anchor="font_ios">
+            <t>Installation is possible for Mac OS X and iOS with a configuration profile.  
+            The Sutton SignWriting Symbol configuration profile includes 2 fonts for SVG: SuttonSignWritingLine and SuttonSignWritingFill.
+            The Sutton SignWriting One configuration profile includes the font SuttonSignWritingOneD.
+            With the configuration profile installed, the SignWriting in Unicode (SWU) characters can be used throughout the operating system, even as file and folder names.
+            <list style='hanging'>
+              <t><xref target="SuttonSignWritingFontSymbol">Sutton SignWriting Symbol Configuration Profile</xref></t>
+              <t><xref target="SuttonSignWritingFontOne">Sutton SignWriting One Configuration Profile</xref></t>
+            </list>
+            </t>
+          </section>
+          <section title="Android"  anchor="font_android">
+            <t>Android can not install the fonts directly onto the system. 
+            The CSS declarations below will install the fonts in the browser cache.
+            </t>
+          </section>
+      </section>
+
+      <section title="Fonts and CSS" anchor="css_fonts">
+          <t>The TrueType Fonts can be used without installing the fonts on any platform by defining two font-face statements. 
+          Simply include the following CSS in any HTML page to access the fonts.
+          Make sure to replace the URLs with the fully qualified links for the fonts.
+          </t>
+          <figure>
+            <artwork>
+@font-face {
+  font-family: "SuttonSignWritingLine";
+  src: 
+    local('SuttonSignWritingLine'),
+    url('https://.../SuttonSignWritingLine.ttf') format('truetype');
+}
+@font-face {
+  font-family: "SuttonSignWritingFill";
+  src: 
+    local('SuttonSignWritingFill'),
+    url('https://.../SuttonSignWritingFill.ttf') format('truetype');
+}
+@font-face {
+  font-family: "SuttonSignWritingOneD";
+  src: 
+    local('SuttonSignWritingOneD'),
+    url('https://.../SuttonSignWritingOneD.ttf') format('truetype');
+}
+            </artwork>
+          </figure>
+          <t>If the fonts are installed, then the system fonts will be used. 
+          If the fonts are not installed when a SignWriting Font page is opened, the CSS will cause the fonts to be automatically downloaded to the browser's cache on the first visit. 
+          Once the fonts are installed in the browser cache, they will remain there until the browser cache is emptied. 
+          Any webside that uses this CSS can access the browser installed font without requesting a new copy. 
+          The fonts are 18 MB, so the first page view make take a few seconds or longer depending on your download speed and processor.
+          </t>
+      </section>
+
+      <section title="Scalar Vector Graphics" anchor="svg">
+        <t>Sutton SignWriting is a 2-dimensional script.
+        The sign images are composed using Scalar Vector Graphic (SVG).
+        </t>
+
+        <section title="Font Based SVG" anchor="svg_font">
+            <t>The conversion of Formal SignWriting to Scalar Vector Graphics requires three parts: header, text, and symbols.
+            Consider the FSW string "M518x533S1870a489x515S18701482x490S20500508x496S2e734500x468".
+            </t>
+            <section title="SVG Header" anchor="svg_header">
+              <t>The header section contains the SVG definition along with the width, height, and viewbox.  
+              The viewbox is a combination of the minimum X, minimum Y, width, and height.
+              <list style='hanging'>
+                <t hangText="Minimum X:">482</t>
+                <t hangText="Maximum X:">518</t>
+                <t hangText="Width:">36</t>
+                <t hangText="Minimum Y:">468</t>
+                <t hangText="Maximum Y:">533</t>
+                <t hangText="Height:">65</t>
+              </list>
+              </t>
+              <figure>
+                <artwork>
+&lt;svg version="1.1" xmlns="http://www.w3.org/2000/svg" 
+  width="36" height="65" viewBox="482 468 36 65">
+                </artwork>
+              </figure>
+              <t>If the width and height properties are not included, then the resulting SVG will automatically expand in size to fill the containing element on the screen.
+              </t>
+              <figure>
+                <artwork>
+&lt;svg version="1.1" xmlns="http://www.w3.org/2000/svg" 
+  viewBox="482 468 36 65">
+                </artwork>
+              </figure>
+            </section>
+            <section title="SVG Text" anchor="svg_text">
+              <t>The SVG text section is included to make it possible to copy and paste Formal SignWriting strings.
+              The font-size is set to zero to make the text invisible.
+              </t>
+              <figure>
+                <artwork>
+&lt;text style="font-size:0%;">
+M518x533S1870a489x515S18701482x490S20500508x496S2e734500x468
+&lt;/text>
+                </artwork>
+              </figure>
+            </section>
+            <section title="SVG Symbols" anchor="svg_syms">
+              <t>Each symbol in the Signbox is a combination of the symbol key and the positioning coordinate.
+              <list style='hanging'>
+                <t hangText="Symbol 1:">S1870a 489x515</t>
+                <t hangText="Symbol 2:">S18701 482x490</t>
+                <t hangText="Symbol 3:">S20500 508x496</t>
+                <t hangText="Symbol 4:">S2e734 500x468</t>
+              </list>
+              </t>
+              <t>Each spatial symbol is written as an SVG group and positioned by the transformation translate.
+              </t>
+              <figure>
+                <artwork>
+  &lt;g transform="translate(489,515)">...&lt;/g>
+  &lt;g transform="translate(482,490)">...&lt;/g>
+  &lt;g transform="translate(508,496)">...&lt;/g>
+  &lt;g transform="translate(500,468)">...&lt;/g>
+                </artwork>
+              </figure>
+              <t>Inside of each group, 2 text elements are written.  
+              The symbol fill is written first using the SuttonSignWritingFill font with a plane 16 character.
+              The symbol line is written second using the SuttonSignWritingLine font with a plane 15 character.
+              See <xref target="sym_swu" /> for the formula to convert symbol keys to codepoints.
+              </t>
+              <figure>
+                <artwork>
+&lt;text class="sym-fill" 
+ style="font-family:'SuttonSignWritingFill';font-size:30px;fill:white;">
+ {plane 16 codepoint}
+&lt;/text>
+&lt;text class="sym-line" 
+ style="font-family:'SuttonSignWritingLine';font-size:30px;fill:black;">
+ {plane 15 codepoint}
+&lt;/text>
+                </artwork>
+              </figure>
+
+          </section>
+
+        </section>
+
+        <section title="Stand Alone SVG" anchor="svg_alone">
+          <t>It is possible to request completed SVG images from the <xref target="SignWritingServer">SignWriting Server</xref>.
+          The SVG images created by the SignWriting Server are stand-alone graphics that do not use the TrueType Fonts.
+          The SVG images use path elements to define the symbol lines and curves.
+          </t>
+          <t>The SVG header and SVG text for the server-side images are the same as the standard FSW to SVG transformation.  
+          See <xref target="svg_font" />
+          </t>
+          <t>The SVG symbols section is structured differently.
+          Multiple SVG elements are contained within each sign SVG image.
+          Each sub-SVG element uses X and Y coordinates to place each symbol.
+          Consider the FSW string "M518x533S1870a489x515S18701482x490S20500508x496S2e734500x468".
+          <list style='hanging'>
+            <t hangText="Symbol 1:">S1870a 489x515</t>
+            <t hangText="Symbol 2:">S18701 482x490</t>
+            <t hangText="Symbol 3:">S20500 508x496</t>
+            <t hangText="Symbol 4:">S2e734 500x468</t>
+          </list>
+
+          </t>
+          <figure>
+            <artwork>
+&lt;svg x="489" y="515">...&lt;/svg>
+&lt;svg x="482" y="490">...&lt;/svg>
+&lt;svg x="508" y="496">...&lt;/svg>
+&lt;svg x="500" y="468">...&lt;/svg>
+            </artwork>
+          </figure>
+          
+          <t>Inside of each sub-SVG element is a group (g) element with one or two path elements.
+          This inside information can only be requested from the SignWriting Server or some other source of the symbol image data.
+          </t>
+
+          <figure>
+            <artwork>
+  &lt;g transform="translate(0.146473559361,17.7697467366) ... ">
+    &lt;path class="sym-fill" fill="white" d="M700 1493 ... "/>
+    &lt;path class="sym-line" fill="black" d="M1826 1480 ... "/>
+  &lt;/g>
+            </artwork>
+          </figure>
+
+        </section>
+
+      </section>
+
+      <section title="HTML and CSS" anchor="html">
+        <t>Basic HTML structures and CSS rules can be used with Formal SignWriting for customization and layout.
+        </t>
+        <section title="Centering and Sizing" anchor="size">
+          <t>It is possible to center a symbol or sign within a div with a few CSS rules.
+          The symbol or sign will automatically shrink in size if the containing div is smaller than the SVG image.
+          Additionally, if the SVG is created with the zoom level of extendable (styling string "-Zx"), the symbol or sign will grow in size to fill as much of the containing div as possible.
+          </t>
+          <figure>
+            <artwork>
+&lt;div class="centered"> 
+  &lt;svg version="1.1" xmlns="http://www.w3.org/2000/svg" ...
+&lt;/div> 
+           </artwork>
+          </figure>
+
+          <figure>
+            <artwork>
+div.centered {
+  position: relative;
+  width: 10%;
+  height: 10%; 
+  border: 1px solid black;
+} 
+
+div.centered svg { 
+  position: absolute; 
+  display: block; 
+  top:2.5%; 
+  bottom: 2.5%; 
+  left: 2.5%; 
+  right: 2.5%; 
+  margin: auto; 
+  max-width: 95%; 
+  max-height: 95%; 
+}
+           </artwork>
+          </figure>
+          
+        </section>
+
+        <section title="Coloring Symbols and Signs" anchor="html_color">
+          <t>Individual signs can be colored with CSS rules.
+          The individual classes of 'sym-line' and 'sym-fill' can be used to isolate each part of a symbol, both positive and negative spaces,
+          or the classes can be ignored to create the shadow of a symbol that includes both aspects of a symbol.</t>
+          <figure>
+            <artwork>
+&lt;svg class="primary" ...
+&lt;svg class="success" ...
+&lt;svg class="info" ...
+&lt;svg class="warning" ...
+&lt;svg class="danger" ...
+&lt;svg class="shadow" ...
+&lt;svg class="inverse" ...
+            </artwork>
+          </figure>
+          <figure>
+            <artwork>
+svg.primary g text.sym-line { fill: #337ab7 !important; }
+svg.success g text.sym-line { fill: #5cb85c !important; }
+svg.info g text.sym-line { fill: #5bc0de !important; }
+svg.warning g text.sym-line { fill: #f0ad4e !important; }
+svg.danger g text.sym-line { fill: #d9534f !important; }
+svg.shadow g text { fill: grey !important; }
+svg.inverse g text.sym-line { fill: white !important; } 
+svg.inverse g text.sym-fill { fill: black !important; }
+           </artwork>
+          </figure>
+          
+        </section>
+
+        <section title="Other Effects" anchor="html_other">
+          <t>Other CSS rules can be used for other effect.
+          Please note that transform property does not effect the document flow and should not be used for general layout.</t>
+          <figure>
+            <artwork>
+svg.shadowed {
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+}
+svg.rotate {
+  transform: rotate(0.5turn);
+}
+svg.bigger {
+  transform: scale(2);
+}
+svg.skewed {
+  transform: skewX(30deg);
+}
+           </artwork>
+          </figure>
+          
+        </section>
+        <section title="Sentences" anchor="html_sentence">
+          <t>SignWriting is written vertically using the vertical writing mode of CSS.
+          To create the center lane and to visually divide the columns of text, several span elements are used.
+          Each sign is contained in a div with a width and height that matches the enclosed sign.
+          To properly align each sign with the center of its lane, the containing div will either use "margin-right" or "border-left".
+          With "border-left", the rule must include "solid transparent" after the size.
+          </t>
+          <figure>
+            <artwork>
+&lt;div class="signtext"> 
+ &lt;span class="outside">&lt;span class="middle">&lt;span class="inside">
+  &lt;div style="width:42px;height:77px;margin-right:2px;">&lt;svg ...
+  &lt;div style="width:38px;height:48px;margin-right:2px;">&lt;svg ...
+  &lt;div style="width:25px;height:9px;border-left:7px solid transparent;">
+
+            </artwork>
+          </figure>
+          <figure>
+            <artwork>
+div.signtext { 
+  -webkit-writing-mode: vertical-lr; 
+  writing-mode: vertical-lr; 
+  font-size: 0%; 
+  border-left: 1px solid blue; 
+  height: 100%; 
+} 
+
+span.outside { border-left: 1px solid blue; vertical-align: top; } 
+span.middle { vertical-align: bottom; } 
+span.inside { border-left: 1px dashed red; } 
+
+div.signtext div { 
+  writing-mode: horizontal-tb; 
+  display: inline-block; 
+  vertical-align: middle; 
+  padding: 20px; 
+  box-sizing: content-box; 
+}
+           </artwork>
+          </figure>
+          
+        </section>
+      </section>
+
+    </section>
+
+      <section title="Transformations"  anchor="transformation">
+          <t>Formal SignWriting and the surrounding technologies have been created to facilitate easy transformations between the various forms.
+          </t>
+          <section title="Formal SignWriting to Query String" anchor="fsw2query">
+            <t>Formal SignWriting strings have several natural transformations to query string.
+            The transformation can use the temporal prefix and/or the spatial signbox.
+            For each symbol, the query can include the exact symbol key, 
+            or the query can use a general symbol key where the fill and rotation modifiers are not explicitly defined.
+            Consider the Formal SignWriting string "AS14c20S27106M518x529S14c20481x471S27106503x489".
+              <list style='hanging'>
+                <t hangText="Exact Temporal Prefix Symbols:">QAS14c20S27106T</t>
+                <t hangText="General Temporal Prefix Symbols:">QAS14cuuS271uuT</t>
+                <t hangText="Exact Spatial Signbox Symbols:">QS14c20S27106</t>
+                <t hangText="General Spatial Signbox Symbols:">QS14cuuS271uu</t>
+                <t hangText="Exact Spatial Signbox Symbols with Location:">QS14c20481x471S27106503x489</t>
+                <t hangText="General Spatial Signbox Symbols with Location:">QS14cuu481x471S271uu503x489</t>
+              </list>
+            </t>
+          </section>
+          <section title="Query String to Regular Expression" anchor="query2regex">
+            <t>The transformation from query string to regular expressions has been fully implemented in the Sutton SignWriting JavaScript Library and the SignWriting Server.
+            </t>
+            <t>The query language to regular expressions generator uses the following regular expression structures as building blocks.
+              <list style='hanging'>
+                <t hangText="Temporal Prefix Prefix:">(A(S[123][0-9a-f]{2}[0-5][0-9a-f])+)</t>
+                <t hangText="Signbox Prefix:">[BLMR]([0-9]{3}x[0-9]{3})</t>
+                <t hangText="Spatial Symbols:">(S[123][0-9a-f]{2}[0-5][0-9a-f][0-9]{3}x[0-9]{3})*</t>
+              </list>
+            </t>
+            <t>The Temporal Prefix Prefix is a structural marker followed by one or more symbols.  
+            For the query string "QT", the prefix is required.  
+            For the general "Q", the prefix is optional so "?" is appended to the Temporal Prefix Prefix regular expression.
+            </t>
+            <t>The Signbox Prefix is a combination of structural marker and preprocessed maximum coordinate.
+            Every constructed regular expression will include the Signbox Prefix.
+            </t>
+            <t>The Spatial Symbols is zero or more symbol definitions and associated coordinates.  
+            The Spatial Symbols regular expression is used for every search.
+            For both "Q" and "QT", it is the only symbol matching used.
+            When searching for specific symbols and ranges, 
+            the general Spatial Symbols definition will sandwich the specific search definitions.
+            </t>
+            <t>Searching for number ranges with regular expressions requires a unique technique.
+            This technique requires five steps.
+            </t>
+            <t>Find a number between 122 and 455
+              <list style='hanging'>
+                <t hangText="1) 10's don't match and the min 1's are not zero ( last number to 9):">Match 12[2-9]</t>
+                <t hangText="2) Bring up the 10's if hundreds are different:">Match 1[3-9][0-9]</t>
+                <t hangText="3) Bring up the 100's if different:">Match [2-3][0-9][0-9]</t>
+                <t hangText="4) Bring up the 10's:">Match 4[0-4][0-9]</t>
+                <t hangText="5) Bring up the 1's:">Match 45[0-5]</t>
+              </list>
+              Final Match (12[2-9]|1[3-9][0-9]|[2-3][0-9][0-9]|4[0-4][0-9]|45[0-5])
+            </t>
+            <t>For the styling string regular expression, see <xref target="styling" />.
+            </t>
+          </section>
+        </section>
+
+
+    <section title="Unicode Considerations" anchor="unicode">
+      <t>In 2015, the Sutton SignWriting block was officially added to the Unicode standard.
+      This block contains characters for representing the symbols of the ISWA 2010.
+      Unfortunately, this encoding has several unresolved issues.
+      The presentation <xref target="Unicode8Issues">Issues with SignWriting in Unicode 8</xref> details why this encoding is incomplete, broken, and fictional.
+      </t>
+      <t>Discussions with the Unicode Technical Committee continue.
+      The latest document submission is <xref target="SuttonSignWritingOptions">Design Options for Sutton SignWriting with examples and fonts</xref>.
+      </t>
+      <t>The Center for Sutton Movement Writing discourages the use of these characters as defined in the Unicode standard.
+      Alternatively, the Center for Sutton Movement Writing encourages the <xref target="characters">character sets</xref> of Formal SignWriting in ASCII (FSW) or SignWriting in Unicode (SWU).
+      </t>
+      <t>
+      This information is included for informational purposes only.
+      </t>
+
+        <section title="Official Characters" anchor="uni_8">
+          <t>In 2015, the symbols of Sutton SignWriting were added to Unicode version 8.
+          </t>
+          <t>
+          See <xref target="sutton_symbols" /> and <xref target="symbols" />
+          </t>
+          <texttable align='left' style='all' anchor='table_uni_8'>
+            <ttcol>Description</ttcol>
+            <ttcol>Unicode Range</ttcol>
+
+            <c>Base Characters</c>
+            <c>U+1D800 to U+1DA8B</c>
+
+            <c>Fill Modifiers 2 to 6</c>
+            <c>U+1DA9B to U+1DA9F</c>
+
+            <c>Rotation Modifiers 2 to 16</c>
+            <c>U+1DAA1 to U+1DAAF</c>
+           
+          </texttable>
+          <t>Each symbol key can be rewritten using 1 to 3 Unicode characters of a base, optional fill, and optional rotation.
+          Given a symbol key as variable "key", in JavaScript the 3 characters can be derived with simple formulas.
+          Both Fill Modifier 1 (U+1DA9A) and Rotation Modifier 1 (U+1DAA0) are inherent characters and should be not be written in the character string.
+          <list>
+            <t>var base = parseInt(key.substr(1,3),16) + parseInt('1D700',16);
+            </t>
+            <t>var fill = parseInt(key.substr(4,1),16) + parseInt('1DA9A',16);
+            </t>
+            <t>var rotation = parseInt(key.substr(5,1),16) + parseInt('1DAA0',16);
+            </t>
+          </list>
+          </t>
+        </section>
+        <section title="17 New Characters" anchor="uni_new">
+          <t>The addition of 17 Unicode characters to the official Unicode standard can complete the script encoding and cover 2-dimensional layout.
+          </t>
+          <texttable align='left' style='all' anchor='table_uni_new'>
+            <ttcol>Description</ttcol>
+            <ttcol>Formal SignWriting</ttcol>
+            <ttcol>Proposed Unicode</ttcol>
+
+            <c>Fill Modifier 1</c>
+            <c>0</c>
+            <c>U+1DA9A</c>
+
+            <c>Rotation Modifier 1</c>
+            <c>0</c>
+            <c>U+1DAA0</c>
+
+            <c>Numbers</c>
+            <c>0 to 9</c>
+            <c>U+1DAB0 to U+1DAB9</c>
+
+            <c>Sequence Marker</c>
+            <c>A</c>
+            <c>U+1DABA</c>
+
+            <c>Signbox Markers</c>
+            <c>B</c>
+            <c>U+1DABB</c>
+           
+            <c>Left Lane Markers</c>
+            <c>L</c>
+            <c>U+1DABC</c>
+           
+            <c>Middle Lane Markers</c>
+            <c>M</c>
+            <c>U+1DABD</c>
+           
+            <c>Right Lane Markers</c>
+            <c>R</c>
+            <c>U+1DABE</c>
+           
+          </texttable>
+          
+          <t>Fill Modifier 1 and Rotation Modifier 1 are included to fix sorting and simplify processing.</t>
+          <t>The 10 number characters express the concept of distance, important for use with 2-dimensional scripts.</t>
+          <t>The 5 structural markers define cohesive units of the script.</t>
+        </section>
+
+    </section>
+
+
+    <section title="IANA Considerations">
+
+      <t>None.</t>
+
+    </section>
+
+    <section title="Security Considerations">
+      <t>None.</t>
+    </section>
+
+  </middle>
+
+  <back>
+
+    <references>
+      <reference anchor="SteveSlevinskiMe" target="http://SteveSlevinski.me">
+        <front>
+          <title>Steve Slevinski's Homepage</title>
+          <author initials="S.S." surname="Slevinski" fullname="Steve Slevinski" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="PatronsOfSignWriting" target="https://patreon.com/signwriting">
+        <front>
+          <title>Support SignWriting on Patreon</title>
+          <author initials="S.S." surname="Slevinski" fullname="Steve Slevinski" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="FutureOfSignWriting" target="https://www.slideshare.net/StephenSlevinski/for-the-future-of-sutton-signwriting-101403924">
+        <front>
+          <title>For the Future of Sutton SignWriting</title>
+          <author initials="S.S." surname="Slevinski" fullname="Steve Slevinski" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="SignWritingServer" target="https://signpuddle.net">
+        <front>
+          <title>SignWriting Server</title>
+          <author initials="S.S." surname="Slevinski" fullname="Stephen E Slevinski Jr" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="SuttonSignWritingFontLine" target="https://cdn.rawgit.com/Slevinski/SuttonSignWriting/master/assets/SuttonSignWritingLine.ttf">
+        <front>
+          <title>Sutton SignWriting Line TypeType Font</title>
+          <author initials="S.S." surname="Slevinski" fullname="Stephen E Slevinski Jr" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="SuttonSignWritingFontFill" target="https://cdn.rawgit.com/Slevinski/SuttonSignWriting/master/assets/SuttonSignWritingFill.ttf">
+        <front>
+          <title>Sutton SignWriting Fill TypeType Font</title>
+          <author initials="S.S." surname="Slevinski" fullname="Stephen E Slevinski Jr" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="SuttonSignWritingFontOneD" target="https://cdn.rawgit.com/Slevinski/SuttonSignWriting/master/assets/SuttonSignWritingOneD.ttf">
+        <front>
+          <title>Sutton SignWriting One-D TypeType Font</title>
+          <author initials="S.S." surname="Slevinski" fullname="Stephen E Slevinski Jr" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="SuttonSignWritingFontSymbol" target="https://cdn.rawgit.com/Slevinski/SuttonSignWriting/master/assets/SuttonSignWritingSymbol.mobileconfig">
+        <front>
+          <title>Sutton SignWriting Symbol Configuration Profile</title>
+          <author initials="S.S." surname="Slevinski" fullname="Stephen E Slevinski Jr" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="SuttonSignWritingFontOne" target="https://cdn.rawgit.com/Slevinski/SuttonSignWriting/master/assets/SuttonSignWritingOne.mobileconfig">
+        <front>
+          <title>Sutton SignWriting One Configuration Profile</title>
+          <author initials="S.S." surname="Slevinski" fullname="Stephen E Slevinski Jr" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="SuttonSignWritingProject" target="https://github.com/Slevinski/SuttonSignWriting">
+        <front>
+          <title>Sutton SignWriting Project</title>
+          <author initials="S.S." surname="Slevinski" fullname="Stephen E Slevinski Jr" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="Unicode8Issues" target="https://www.slideshare.net/StephenSlevinski/sign-writing-in-unicode-8-issues">
+        <front>
+          <title>Issues with SignWriting in Unicode 8</title>
+          <author initials="S.S." surname="Slevinski" fullname="Stephen E Slevinski Jr" />
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="SuttonSignWritingOptions" target="http://www.unicode.org/L2/L2017/17220-signwriting-design-opt.pdf">
+        <front>
+          <title>Sutton SignWriting Design Options</title>
+          <author initials="S.S." surname="Slevinski" fullname="Stephen E Slevinski Jr" />
+          <date/>
+        </front>
+      </reference>
+
+
+    </references>
+    <section title="For the Future of Sutton SignWriting" anchor="future">
+
+      <t>Sign languages are human languages.  
+      Around the world, over 140 sign languages have been identified.  
+      Of those recognized sign languages, I helped create and collect digital SignWriting for 60 of those sign languages.
+      </t>
+
+      <t>For the past 14 years, I've been working with Valerie Sutton, the inventor of SignWriting. 
+      Together, we created the Sutton SignWriting standards of 2010, 2012, and 2017. 
+      These standards will be useful far into the future.
+      </t>
+
+      <t>SignWriting is free to use. 
+      SignWriting is promoted by the Center for Sutton Movement Writing, a 501c3 educational non-profit (95-3068257).  
+      We've been successful with developing and spreading SignWriting, but we haven't been successful with fundraising.
+      </t>
+
+      <t>If I am going to continue full-time with SignWriting starting in 2019, 
+      I need an alternative and reliable funding source. 
+      I'm looking for groups and individuals who find my work meaningful to become patrons to fund development and future growth.
+      </t>
+
+      <t>I chose Patreon for two reasons.  
+      First, if my work is directly financed by patrons, I will no longer need to burden Valerie Sutton and the non-profit.  
+      Second, everyone who becomes my patron adds to the SignWriting platform.  
+      The size of the platform matters when dealing with educational institutions, government agencies, and international standards.
+      </t>
+
+      <t>I am grateful to all of my patrons, especially those who join the team for $1 a month.  
+      For patrons who choose a larger monthly donation, I have created a few perks and incentives for joining.
+      </t>
+
+      <t>Thanks for your consideration,
+      </t>
+
+      <t>-Steve Slevinski</t>
+      <t><xref target="SteveSlevinskiMe">http://SteveSlevinski.me</xref>.
+      </t>
+      <t><xref target="FutureOfSignWriting">For the Future of Sutton SignWriting</xref>.
+      </t>
+      <t><xref target="PatronsOfSignWriting">Support SignWriting on Patreon</xref>.
+      </t>
+
+    </section>
+  </back>
+</rfc>
