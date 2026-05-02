@@ -4,11 +4,11 @@ authors:
   - family-names: Slevinski
     given-names: Steve
     orcid: https://orcid.org/0009-0007-7051-1374
-title: "Formal SignWriting (draft-slevinski-formal-signwriting)"
+title: "Formal SignWriting Internet Draft (draft-slevinski-formal-signwriting)"
 version: 10
 doi: 10.5281/zenodo.17553763
 date-released: 2025-11-07
-url: "https://github.com/sutton-signwriting/formal-signwriting"
+url: "https://github.com/sutton-signwriting/formal-signwriting-internet-draft"
 keywords:
   - SignWriting
   - Formal SignWriting
