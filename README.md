@@ -1,4 +1,4 @@
-# Formal SignWriting
+# Formal SignWriting Internet Draft
 
 This repository hosts the source XML and generated documents for the "Formal SignWriting" IETF draft standard (draft-slevinski-formal-signwriting).  This document specifies the Formal SignWriting character sets, grammar, token patterns, symbol encoding, spatial organization, and sequence representation. It also details technical integration for both Formal SignWriting in ASCII (FSW) and SignWriting in Unicode (SWU) formats, including styling string, query languages, and transformations.
 
@@ -6,7 +6,7 @@ This repository hosts the source XML and generated documents for the "Formal Sig
 For an overview of the standard's origins, development history, and relation to Sutton SignWriting, see [background.md](background.md).
 
 ## Directory Structure
-- **`source/`**: Contains the source XML files for all revisions of Formal SignWriting.
+- **`source/`**: Contains the source XML files for all revisions of the Formal SignWriting Internet Draft.
 - **`dist/`**: Pre-generated HTML, TXT, and PDF versions of the latest revision ready for distribution.
 - **`background.md`**: Explanatory document on the standard's background.
 - **`CITATION.cff`**: Metadata for citing this repository (see "Citation" section below).
