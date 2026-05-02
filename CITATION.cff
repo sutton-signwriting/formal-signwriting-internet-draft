@@ -1,11 +1,11 @@
 cff-version: 1.2.0
-message: "If you use this standard, please cite it as below."
+message: "If you use this Internet-Draft archive, please cite it as below."
 authors:
   - family-names: Slevinski
     given-names: Steve
     orcid: https://orcid.org/0009-0007-7051-1374
-title: "Formal SignWriting Internet Draft (draft-slevinski-formal-signwriting)"
-version: 10
+title: "Formal SignWriting Internet-Draft (draft-slevinski-formal-signwriting)"
+version: "10"
 doi: 10.5281/zenodo.17553763
 date-released: 2025-11-07
 url: "https://github.com/sutton-signwriting/formal-signwriting-internet-draft"
@@ -13,10 +13,15 @@ keywords:
   - SignWriting
   - Formal SignWriting
   - Sutton SignWriting
-  - Sign language
-  - Character encoding
+  - sign language
+  - character encoding
   - Internet-Draft
-  - Digital writing systems
+  - digital writing systems
+abstract: >
+  Archival citation record for the Formal SignWriting Internet-Draft
+  draft-slevinski-formal-signwriting. This record preserves the Internet-Draft
+  version of the Formal SignWriting specification and should be distinguished
+  from later publication-series materials on Formal SignWriting.
 references:
   - type: report
     title: "The SignPuddle Standard for SignWriting Text (draft-slevinski-signwriting-text-00)"
@@ -28,4 +33,4 @@ references:
     notes: >
       Original publication via IETF where Formal SignWriting was first introduced.
       The specification has remained consistent since then and was later superseded
-      by "draft-slevinski-formal-signwriting" in October 2016.
+      by draft-slevinski-formal-signwriting in October 2016.
